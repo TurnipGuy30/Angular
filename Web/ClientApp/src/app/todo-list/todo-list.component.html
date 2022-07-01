@@ -1,0 +1,49 @@
+<table class="table table-striped">
+
+    <!-- Table Heading -->
+
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Done</th>
+        </tr>
+    </thead>
+
+    <!-- Table Body -->
+    <tbody>
+
+        <!-- Item Row -->
+        <tr *ngFor="let item of todos" [ngClass]="{'bg-success': item.isDone}">
+            <td>{{item.name}}</td>
+            <td>
+                <!-- <button class="btn btn-light" (click)="onClick_toggleItem($event)"><i [ngClass]="item.isDone? icons.checkboxChecked : icons.checkboxEmpty" aria-hidden="true"></i></button> -->
+                <input type="checkbox" (click)="onClick_toggleItem($event, item.id)" [checked]="item.isDone">
+            </td>
+            <td>
+                <button class="btn btn-light" (click)="onClick_deleteItem(item.id)"><i [ngClass]="icons.delete"></i></button>
+            </td>
+        </tr>
+
+    </tbody>
+
+    <!-- Table Footer -->
+
+    <tfoot>
+        <tr [formGroup]="formAddItem">
+            <td>
+                <input type="text" formControlName="name" class="form-control">
+            </td>
+            <td>
+                <button type="button" (click)="onSubmit()" class="btn btn-primary">Add Item</button>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<hr>
+
+
+<!-- 
+<form [formGroup]="formAddItem" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="name" class="form-input">
+    <button type="submit" class="btn btn-primary">Add Item</button>
+</form> -->
